@@ -21,33 +21,35 @@ const images = [
   },
 ];
 
-const items = images.map((item) => {
-  const element = document.createElement("li");
-  const image = `<img src="${item.url}" alt="${item.alt}" /> `;
-  element.insertAdjacentHTML("afterbegin", image);
-  return element;
-});
+const makeGalleryItemMarkup = ({ url, alt }) => {
+  return `
+  <li>
+    <img src="${url}" alt="${alt}" />
+  </li>`;
+};
 
-const gallery = document.querySelector(".gallery");
+const makeGalleryItem = images.map(makeGalleryItemMarkup).join("");
 
-gallery.append(...items);
-gallery.style.display = "flex";
-gallery.style.width = "100%";
-gallery.style.padding = "0";
-gallery.style.margin = "0 auto";
-gallery.style.listStyle = "none";
+const galleryRef = document.querySelector(".gallery");
+galleryRef.insertAdjacentHTML("afterbegin", makeGalleryItem);
 
-const arrayOfItems = gallery.querySelectorAll("li");
+galleryRef.style.display = "flex";
+galleryRef.style.width = "100%";
+galleryRef.style.padding = "0";
+galleryRef.style.margin = "0 auto";
+galleryRef.style.listStyle = "none";
 
-arrayOfItems.forEach((item) => {
+const itemRef = galleryRef.querySelectorAll("li");
+
+itemRef.forEach((item) => {
   item.style.flexBasis = "calc((100%-20px - 20px)/3)";
   item.style.margin = "10px";
   item.style.height = "300px";
 });
 
-const arrayOfImages = gallery.querySelectorAll("img");
+const imagesRef = galleryRef.querySelectorAll("img");
 
-arrayOfImages.forEach((img) => {
+imagesRef.forEach((img) => {
   img.style.width = "100%";
   img.style.height = "100%";
   img.style.objectFit = "cover";
