@@ -25,15 +25,12 @@
 
 const validationInput = document.querySelector("#validation-input");
 
-validationInput.addEventListener("input", onInputEnter);
 validationInput.addEventListener("blur", onInputBlur);
 
-function onInputEnter() {
-  validationInput.style.border = "3px solid #bdbdbd";
-}
-
 function onInputBlur(event) {
-  if (
+  if (event.currentTarget.value.length === 0) {
+    validationInput.style.borderColor = "#bdbdbd";
+  } else if (
     event.currentTarget.value.length === Number(validationInput.dataset.length)
   ) {
     validationInput.style.borderColor = "#4caf50";
