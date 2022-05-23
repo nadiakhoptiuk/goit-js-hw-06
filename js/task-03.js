@@ -32,14 +32,15 @@ const gallery = document.querySelector(".gallery");
 
 gallery.append(...items);
 gallery.style.display = "flex";
-gallery.style.paddingLeft = "0";
-gallery.style.listStyle = "none";
 gallery.style.width = "100%";
+gallery.style.padding = "0";
+gallery.style.margin = "0 auto";
+gallery.style.listStyle = "none";
 
 const arrayOfItems = gallery.querySelectorAll("li");
 
 arrayOfItems.forEach((item) => {
-  item.style.flexBasis = "calc((100%-20px)/3)";
+  item.style.flexBasis = "calc((100%-20px - 20px)/3)";
   item.style.margin = "10px";
   item.style.height = "300px";
 });
