@@ -29,12 +29,15 @@ validationInput.addEventListener("blur", onInputBlur);
 
 function onInputBlur(event) {
   if (event.currentTarget.value.length === 0) {
-    validationInput.style.borderColor = "#bdbdbd";
+    validationInput.classList.remove("invalid");
+    validationInput.classList.remove("valid");
   } else if (
     event.currentTarget.value.length === Number(validationInput.dataset.length)
   ) {
-    validationInput.style.borderColor = "#4caf50";
+    validationInput.classList.add("valid");
+    validationInput.classList.remove("invalid");
   } else {
-    validationInput.style.borderColor = "#f44336";
+    validationInput.classList.add("invalid");
+    validationInput.classList.remove("valid");
   }
 }
