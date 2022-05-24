@@ -37,7 +37,12 @@ let number = 0;
 
 function getNumber(event) {
   number = Number(event.currentTarget.value);
-  return number;
+  if (number < 1 || number > 100 || number % 1 !== 0) {
+    alert("Введіть ціле число від 1 до 100");
+    event.currentTarget.value = "";
+  } else {
+    return number;
+  }
 }
 
 function createBoxes(event) {
