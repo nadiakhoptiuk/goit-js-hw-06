@@ -47,18 +47,40 @@ function getNumber(event) {
 
 function createBoxes(event) {
   const newArr = [];
+  newArr.length = number;
 
-  for (let i = 1; i <= number; i += 1) {
-    const newEl = document.createElement("div");
-    const increaseSize = 30 + i * 10;
+  // ------ 1 спосіб
+  const newEl = "<div></div>";
 
-    newEl.style.width = `${increaseSize}px`;
-    newEl.style.height = `${increaseSize}px`;
-    newEl.style.backgroundColor = getRandomHexColor();
-    newArr.push(newEl);
-  }
+  const str = newArr.fill(newEl).join("");
 
-  refs.boxesWrap.append(...newArr);
+  refs.boxesWrap.insertAdjacentHTML("afterbegin", str);
+
+  const arrayOfDiv = refs.boxesWrap.children;
+
+  const resultArray = [...arrayOfDiv].map((element, index) => {
+    const increaseSize = 30 + index * 10;
+
+    element.style.width = `${increaseSize}px`;
+    element.style.height = `${increaseSize}px`;
+    element.style.backgroundColor = getRandomHexColor();
+
+    return element;
+  });
+
+  // 2спосіб
+  // for (let i = 1; i <= number; i += 1) {
+  //   const newEl = document.createElement("div");
+  //   const increaseSize = 30 + i * 10;
+
+  //   newEl.style.width = `${increaseSize}px`;
+  //   newEl.style.height = `${increaseSize}px`;
+  //   newEl.style.backgroundColor = getRandomHexColor();
+  //   newArr.push(newEl);
+  // }
+
+  // refs.boxesWrap.append(...newArr);
+
   refs.input.value = "";
   number = 0;
 }
