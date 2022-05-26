@@ -28,16 +28,24 @@ const validationInput = document.querySelector("#validation-input");
 validationInput.addEventListener("blur", onInputBlur);
 
 function onInputBlur(event) {
-  if (event.currentTarget.value.length === 0) {
-    validationInput.classList.remove("invalid");
-    validationInput.classList.remove("valid");
-  } else if (
-    event.currentTarget.value.length === Number(validationInput.dataset.length)
-  ) {
-    validationInput.classList.add("valid");
-    validationInput.classList.remove("invalid");
+  const symbolsLength = event.currentTarget.value.length;
+
+  if (symbolsLength === 0) {
+    removeAllClasses(validationInput, "invalid", "valid");
+  } else if (symbolsLength === Number(validationInput.dataset.length)) {
+    changeClasses(validationInput, "valid", "invalid");
   } else {
-    validationInput.classList.add("invalid");
-    validationInput.classList.remove("valid");
+    changeClasses(validationInput, "invalid", "valid");
+  }
+}
+
+function changeClasses(elem, add, remove) {
+  elem.classList.add(add);
+  elem.classList.remove(remove);
+}
+
+function removeAllClasses(elem, ...classesToRemove) {
+  for (const oneClass of classesToRemove) {
+    elem.classList.remove(oneClass);
   }
 }
