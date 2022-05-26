@@ -11,7 +11,7 @@ const refs = {
 refs.input.addEventListener("input", onInputChange);
 
 function onInputChange(event) {
-  return (refs.nameLabel.textContent = !event.currentTarget.value
+  return (refs.nameLabel.textContent = !event.currentTarget.value.trim()
     ? "Anonymous"
-    : event.currentTarget.value);
+    : event.currentTarget.value.trim());
 }
