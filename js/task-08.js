@@ -34,10 +34,11 @@ function onFormSubmit(event) {
     password: formElements.password.value,
   };
 
-  if (valuesFromForm.email === "" || valuesFromForm.password === "") {
+  if (!valuesFromForm.email || !valuesFromForm.password) {
     alert("Всі поля повинні бути заповнені");
-  } else {
-    console.log(valuesFromForm);
-    event.currentTarget.reset();
+    return;
   }
+
+  console.log(valuesFromForm);
+  event.currentTarget.reset();
 }
