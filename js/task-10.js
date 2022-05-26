@@ -40,46 +40,31 @@ function getNumber(event) {
   if (number < 1 || number > 100 || number % 1 !== 0) {
     alert("Введіть ціле число від 1 до 100");
     event.currentTarget.value = "";
-  } else {
-    return number;
+    return;
   }
+  console.log(number);
+  return number;
+}
+
+function createBoxesMarkup(arr) {
+  const resultArray = arr.map((element, index) => {
+    const increaseSize = 30 + index * 10;
+    const color = getRandomHexColor();
+
+    return `<div style="width: ${increaseSize}px; height: ${increaseSize}px; background-color: ${color}"></div>`;
+  });
+
+  return resultArray;
 }
 
 function createBoxes(event) {
   const newArr = [];
   newArr.length = number;
+  newArr.fill(number);
 
-  // ------ 1 спосіб
-  const newEl = "<div></div>";
+  const resultMarkupStr = createBoxesMarkup(newArr).join("");
 
-  const str = newArr.fill(newEl).join("");
-
-  refs.boxesWrap.insertAdjacentHTML("afterbegin", str);
-
-  const arrayOfDiv = refs.boxesWrap.children;
-
-  const resultArray = [...arrayOfDiv].map((element, index) => {
-    const increaseSize = 30 + index * 10;
-
-    element.style.width = `${increaseSize}px`;
-    element.style.height = `${increaseSize}px`;
-    element.style.backgroundColor = getRandomHexColor();
-
-    return element;
-  });
-
-  // 2спосіб
-  // for (let i = 1; i <= number; i += 1) {
-  //   const newEl = document.createElement("div");
-  //   const increaseSize = 30 + i * 10;
-
-  //   newEl.style.width = `${increaseSize}px`;
-  //   newEl.style.height = `${increaseSize}px`;
-  //   newEl.style.backgroundColor = getRandomHexColor();
-  //   newArr.push(newEl);
-  // }
-
-  // refs.boxesWrap.append(...newArr);
+  refs.boxesWrap.insertAdjacentHTML("afterbegin", resultMarkupStr);
 
   refs.input.value = "";
   number = 0;
@@ -88,3 +73,16 @@ function createBoxes(event) {
 function destroyBoxes(event) {
   refs.boxesWrap.innerHTML = "";
 }
+
+// 2спосіб
+// for (let i = 1; i <= number; i += 1) {
+//   const newEl = document.createElement("div");
+//   const increaseSize = 30 + i * 10;
+
+//   newEl.style.width = `${increaseSize}px`;
+//   newEl.style.height = `${increaseSize}px`;
+//   newEl.style.backgroundColor = getRandomHexColor();
+//   newArr.push(newEl);
+// }
+
+// refs.boxesWrap.append(...newArr);
